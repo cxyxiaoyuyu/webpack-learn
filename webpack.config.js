@@ -1,5 +1,5 @@
 // webpack 基于nodeJS
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssWxtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
@@ -35,8 +35,8 @@ module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
-      use: ['style-loader','css-loader']
-    },{
+      use: ['style-loader', 'css-loader']
+    }, {
       test: /\.less$/,
       // less-loader less语法转为css语法
       // css-loader css字符串放进bundle文件中
@@ -46,10 +46,10 @@ module.exports = {
         // 生产环境下使用minicss插件  这个插件对hmr支持不好 在开发时使用style-loader
         // MiniCssWxtractPlugin.loader,
         {
-          loader:  "css-loader",
-          options:{
+          loader: "css-loader",
+          options: {
             modules: true  // 开启css模块化  
-          } 
+          }
         },
         {
           loader: "postcss-loader"
@@ -57,19 +57,19 @@ module.exports = {
         "less-loader"
       ]
       // use: ["style-loader","css-loader","less-loader"]
-    },{
+    }, {
       test: /\.scss$/,
       use: [
         "style-loader",
         {
-          loader:  "css-loader",
-          options:{
+          loader: "css-loader",
+          options: {
             modules: true  // 开启css模块化  
           }
         },
         "sass-loader"
       ]
-    },{
+    }, {
       test: /\.(png|jpe?g|gif)$/,
       use: {
         // loader: "file-loader",
@@ -81,7 +81,7 @@ module.exports = {
           limit: 9 * 1024,   // 单位是字节byte 1024 = 1kb
         }
       }
-    },{
+    }, {
       // test: /\.(eot|ttf|woff|woff2|svg)$/,
       // use: {
       //   loader: "url-loader",
@@ -90,28 +90,11 @@ module.exports = {
       //     outputPath: "font"
       //   }
       // }
-    },{
+    }, {
       test: /\.js/,
       exclude: /node_modules/,
       use: {
         loader: "babel-loader",
-        options: {
-          // 语法转换插件 preset-env
-          presets: [
-            '@babel/preset-env',
-            {
-              targets: {
-                edge: "17",
-                firefox: "60",
-                chrome: "67",
-                safari: "11.1"
-              },
-              corejs: 2,
-              // 不需要import 全自动检测 需要安装@babel/polyfill
-              useBuiltIns: "usage", // 按需加载
-            }
-          ]
-        }
       }
     }]
   },
@@ -122,14 +105,14 @@ module.exports = {
       filename: "css/[name].css"
     }),
     new HtmlWebpackPlugin({
-      template:"./src/index.html",
+      template: "./src/index.html",
       filename: "index.html"
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
   // 开启source-map  会多出一个map文件
   devtool: "source-map",
-  
+
   devServer: {
     // 静态资源目录
     // static: {
