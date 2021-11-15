@@ -2,6 +2,7 @@
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssWxtractPlugin = require('mini-css-extract-plugin')
+const 
 
 const path = require('path')
 
@@ -111,6 +112,16 @@ module.exports = {
     //   directory: path.join(__dirname, 'public'),
     // },
     open: true,  // 自动打开浏览器窗口
-    port: 8080
+    port: 8080,
+    proxy: {
+      "/api": {
+        target: "http://localhost:9090"
+      }
+    },
+    onBeforeSetupMiddleware: function (devServer) {
+      devServer.app.get('/api/info', function (req, res) {
+        res.json({ custom: 'response' });
+      });
+    },
   }
 }
