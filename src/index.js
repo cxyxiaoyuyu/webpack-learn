@@ -42,13 +42,23 @@
 
 
 // React 
-import React, { Component } from "react"
-import ReactDom from "react-dom"
+// import React, { Component } from "react"
+// import ReactDom from "react-dom"
 
-class App extends Component {
-  render(){
-    return <div>hello world</div>
-  }
-}
+// class App extends Component {
+//   render(){
+//     return <div>hello world</div>
+//   }
+// }
 
-ReactDom.render(<App/>,document.getElementById('app'))
+// ReactDom.render(<App/>,document.getElementById('app'))
+
+// Vue
+import Vue from "vue"
+console.log(Vue)
+const app = new Vue({
+  data: {
+    hello: "hello vue"
+  },
+  // template: '<div>Hello Vue</div>'
+}).$mount('#app')
