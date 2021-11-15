@@ -5,12 +5,16 @@
 }
 html {
   body {
-    background-color: red;
-    font-family: "webfont";
-    .ele {
-      display: flex;
-      color: blue;
-      background: white;
+    // background-color: red;
+    // font-family: "webfont";
+    // .ele {
+    //   display: flex;
+    //   color: blue;
+    //   background: yellow
+    // }
+
+    div:nth-child(odd) {
+      background: yellow;  // 开启hmr 修改颜色 页面不会刷新
     }
   }
 }

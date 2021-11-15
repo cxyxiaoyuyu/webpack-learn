@@ -2,8 +2,7 @@
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssWxtractPlugin = require('mini-css-extract-plugin')
-const 
-
+const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
@@ -43,13 +42,14 @@ module.exports = {
       // css-loader css字符串放进bundle文件中
       // style-loader  提取css字符串放进style标签中
       use: [
-        // "style-loader",
-        MiniCssWxtractPlugin.loader,
+        "style-loader",
+        // 生产环境下使用minicss插件  这个插件对hmr支持不好 在开发时使用style-loader
+        // MiniCssWxtractPlugin.loader,
         {
           loader:  "css-loader",
           options:{
             modules: true  // 开启css模块化  
-          }
+          } 
         },
         {
           loader: "postcss-loader"
@@ -101,7 +101,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template:"./src/index.html",
       filename: "index.html"
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   // 开启source-map  会多出一个map文件
   devtool: "source-map",
@@ -111,6 +112,7 @@ module.exports = {
     // static: {
     //   directory: path.join(__dirname, 'public'),
     // },
+    hot: true,   // 开启hmO
     open: true,  // 自动打开浏览器窗口
     port: 8080,
     proxy: {
