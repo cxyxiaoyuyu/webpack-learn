@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'webfont';
+  font-display: swap;
+  src: url(../29a9f9d8ccc1d60518a9.eot);
+  /* IE9 */
+}
+html body {
+  background-color: red;
+  font-family: "webfont";
+}
+html body .hnFPH863CiqahDngAY1m {
+  display: -ms-flexbox;
+  display: flex;
+  color: blue;
+  background: white;
+}
+
+
+/*# sourceMappingURL=main.css.map*/
