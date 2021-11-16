@@ -1,4 +1,4 @@
-import css from "./css/index.less"
+// import css from "./css/index.less"
 // import pic from './images/logo.png'
 
 
@@ -42,16 +42,16 @@ import css from "./css/index.less"
 
 
 // React 
-// import React, { Component } from "react"
-// import ReactDom from "react-dom"
+import React, { Component } from "react"
+import ReactDom from "react-dom"
 
-// class App extends Component {
-//   render(){
-//     return <div>hello world</div>
-//   }
-// }
+class App extends Component {
+  render(){
+    return <div>hello world</div>
+  }
+}
 
-// ReactDom.render(<App/>,document.getElementById('app'))
+ReactDom.render(<App/>,document.getElementById('app'))
 
 // Vue
 // import Vue from "vue"
@@ -63,8 +63,8 @@ import css from "./css/index.less"
 //   // template: '<div>Hello Vue</div>'
 // }).$mount('#app')
 
-import lodash from 'lodash'
-console.log(lodash)
+// import lodash from 'lodash'
+// console.log(lodash)
 
-const _  = require("lodash")
-console.log(_)
+// const _  = require("lodash")
+// console.log(_)
