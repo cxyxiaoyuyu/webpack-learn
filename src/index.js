@@ -54,11 +54,17 @@
 // ReactDom.render(<App/>,document.getElementById('app'))
 
 // Vue
-import Vue from "vue"
-console.log(Vue)
-const app = new Vue({
-  data: {
-    hello: "hello vue"
-  },
-  // template: '<div>Hello Vue</div>'
-}).$mount('#app')
+// import Vue from "vue"
+// console.log(Vue)
+// const app = new Vue({
+//   data: {
+//     hello: "hello vue"
+//   },
+//   // template: '<div>Hello Vue</div>'
+// }).$mount('#app')
+
+import lodash from 'lodash'
+console.log(lodash)
+
+const _  = require("lodash")
+console.log(_)

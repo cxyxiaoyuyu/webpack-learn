@@ -1,4 +1,4 @@
-{
+module.exports = {
   // 语法转换插件 preset-env
   presets: [
     [

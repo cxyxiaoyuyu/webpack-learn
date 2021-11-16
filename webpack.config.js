@@ -20,8 +20,9 @@ module.exports = {
   // 出口
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: "[name]-[chunkhash:6].js"
-
+    filename: "[name]-[chunkhash:6].js",
+    // 静态资源输出目录 观察生成的html引入js的地址 不过要自己上传到cnd地址
+    publicPath: "https://cdn.xiaoyu.com/"  
     // 占位符
     // hash 整个项目的hash值 生成文件的hash值是一致 无论修改哪个文件重新构建就都会修改
     // chunkhash  只会修改 修改的入口文件对应的 出口文件的hash值 
@@ -35,9 +36,11 @@ module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
+      include: path.resolve(__dirname, './src'),
       use: ['style-loader', 'css-loader']
     }, {
       test: /\.less$/,
+      include: path.resolve(__dirname, './src'),
       // less-loader less语法转为css语法
       // css-loader css字符串放进bundle文件中
       // style-loader  提取css字符串放进style标签中
@@ -59,6 +62,7 @@ module.exports = {
       // use: ["style-loader","css-loader","less-loader"]
     }, {
       test: /\.scss$/,
+      include: path.resolve(__dirname, './src'),
       use: [
         "style-loader",
         {
@@ -71,6 +75,7 @@ module.exports = {
       ]
     }, {
       test: /\.(png|jpe?g|gif)$/,
+      include: path.resolve(__dirname, './src'),
       use: {
         // loader: "file-loader",
         loader: "url-loader",  // 推荐使用url-loader 支持limit
@@ -91,18 +96,20 @@ module.exports = {
       //   }
       // }
     }, {
-      test: /\.js/,
-      exclude: /node_modules/,
-      use: {
-        loader: "babel-loader",
-      }
+      // test: /\.js/,
+      // include: path.resolve(__dirname, './src'),
+      // exclude: /node_modules/,
+      // use: {
+        // loader: "babel-loader",
+      // }
     }]
   },
   // 作用于webpack 整个打包周期
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssWxtractPlugin({
-      filename: "css/[name].css"
+      // 用contenthash 只修改js 不修改css hash值不变
+      filename: "css/[name]-[contenthash:8].css"
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
@@ -131,5 +138,29 @@ module.exports = {
         res.json({ custom: 'response' });
       });
     },
-  }
+  },
+
+  resolve: {
+    // 查找第三方依赖
+    modules: [
+      path.resolve(__dirname, "./node_modules")
+    ],
+    // 减少查找过程
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      react: path.resolve(__dirname, "./node_modules/react/umd/react.production.min.js"),
+      "react-dom": path.resolve(__dirname, "./node_modules/react-dom/umd/react-dom.production.min.js")
+    },
+    // 引入的文件不带后缀 自动加上后缀 查找文件是否存在
+    // 后缀尝试列表尽量小  导入语句尽量带上后缀
+    extensions: [".js", ".json", ".jsx"]
+  },
+
+  // 在html中用script通过cdn引入了以后  入口文件也引用了  就不需要打包了
+  externals: {
+    //jquery通过script引⼊之后，全局中即有了 jQuery 变量
+    'jquery': 'jQuery'
+  },
+
+
 }
