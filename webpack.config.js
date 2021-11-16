@@ -1,7 +1,11 @@
 // webpack 基于nodeJS
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 抽离出css文件
 const MiniCssWxtractPlugin = require('mini-css-extract-plugin')
+// 压缩css体积
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
 const webpack = require('webpack')
 const path = require('path')
 
@@ -45,9 +49,9 @@ module.exports = {
       // css-loader css字符串放进bundle文件中
       // style-loader  提取css字符串放进style标签中
       use: [
-        "style-loader",
+        // "style-loader",
         // 生产环境下使用minicss插件  这个插件对hmr支持不好 在开发时使用style-loader
-        // MiniCssWxtractPlugin.loader,
+        MiniCssWxtractPlugin.loader,
         {
           loader: "css-loader",
           options: {
@@ -104,6 +108,12 @@ module.exports = {
       // }
     }]
   },
+  // 压缩css体积
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
+  },
   // 作用于webpack 整个打包周期
   plugins: [
     new CleanWebpackPlugin(),
@@ -113,7 +123,12 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "index.html"
+      filename: "index.html",
+      minify: {
+        removeComments: true, // 移除HTML中的注释
+        collapseWhitespace: true, // 删除空⽩符与换⾏符
+        minifyCSS: true // 压缩内联css
+      }
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

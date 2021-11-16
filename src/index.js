@@ -1,4 +1,4 @@
-// import css from "./css/index.less"
+import css from "./css/index.less"
 // import pic from './images/logo.png'
 
 
