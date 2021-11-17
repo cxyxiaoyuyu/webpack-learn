@@ -7,12 +7,17 @@ module.exports = function(source,map,ast){
 
   // const result = source.replace("hello","hello "+this.query.name)
 
-
+  // 处理异步
+  const callback = this.async()
+  setTimeout(()=>{
+    const result = source.replace("hello","hello "+this.query.name)
+    callback(null,result)
+  },1000)
 
   // return result
 
   // 官方推荐用this.callback() 返回多个信息
-  this.callback(null,result)
+  // this.callback(null,result)
 
   // this.callback( err,content,sourceMap,meta)
 }

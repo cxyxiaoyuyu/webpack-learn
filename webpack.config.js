@@ -11,12 +11,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: [{
-          loader: path.resolve(__dirname,"./loader/index.js"),
-          options: {
-            name: 'xiaoyu'
+        use: [
+          path.resolve(__dirname,"./loader/index2.js"),
+          {
+            loader: path.resolve(__dirname,"./loader/index.js"),
+            options: {
+              name: 'xiaoyu'
+            }
           }
-        }]
+        ]
       }
     ]
   }
