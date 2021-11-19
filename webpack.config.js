@@ -7,18 +7,28 @@ module.exports = {
     path: path.resolve(__dirname,'./dist'),
     filename: "main.js"
   },
+  resolveLoader: {
+    modules: ["node_modules","./loader"],
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: [
-          path.resolve(__dirname,"./loader/index2.js"),
+          "index2",
           {
-            loader: path.resolve(__dirname,"./loader/index.js"),
+            loader: "index",
             options: {
               name: 'xiaoyu'
             }
           }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "less-loader"
         ]
       }
     ]
